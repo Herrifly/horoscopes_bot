@@ -17,8 +17,10 @@ def start(message):
 
     us_id = message.from_user.id
     us_name = message.from_user.first_name
+    cursor.execute("SELECT user_id FROM zodiaks WHERE user_id = ?", (us_id, ))
+    if cursor.fetchone() is None:
+        db_table_val(user_id=us_id, user_name=us_name)
 
-    db_table_val(user_id=us_id, user_name=us_name)
 
 
 def db_table_val(user_id: int, user_name: str):
@@ -28,6 +30,7 @@ def db_table_val(user_id: int, user_name: str):
 
 
 def db_table_zodiak(user_id: int, user_zodiak: str):
+
     cursor.execute('UPDATE "zodiaks"  SET "user_zodiak" = ? WHERE "user_id" = ? ',
                    (user_zodiak, user_id))
     conn.commit()
