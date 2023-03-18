@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import schedule
 import sqlite3
 import time
 
@@ -25,9 +24,9 @@ def search_info():
                            (text_zodiak, i))
             conn.commit()
 
-
-schedule.every().day.at("00:00").do(search_info)
-
-
-while True:
-    schedule.run_pending()
+search_info()
+# schedule.every().day.at("00:00").do(search_info)
+#
+#
+# while True:
+#     schedule.run_pending()

@@ -2,6 +2,13 @@ import telebot
 from config import BOT_TOKEN
 import sqlite3
 from telebot import types
+from datetime import datetime
+from datetime import timedelta
+import threading
+from parser import search_info
+
+
+
 
 bot = telebot.TeleBot(BOT_TOKEN)
 conn = sqlite3.connect('db/database_zodiak.db', check_same_thread=False)
@@ -116,3 +123,9 @@ def prognoz(message):
 
 
 bot.infinity_polling()
+
+now = datetime.now()
+run_at = now + timedelta(minutes=2)
+delay = (run_at - now).total_seconds()
+
+threading.Timer(delay, search_info).start()
