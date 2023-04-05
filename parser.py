@@ -25,8 +25,3 @@ def search_info():
             conn.commit()
 
 search_info()
-# schedule.every().day.at("00:00").do(search_info)
-#
-#
-# while True:
-#     schedule.run_pending()

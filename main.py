@@ -6,7 +6,7 @@ from datetime import datetime
 from datetime import timedelta
 import threading
 from parser import search_info
-
+import time
 
 
 
@@ -121,11 +121,16 @@ def prognoz(message):
 
     bot.send_message(message.chat.id, 'Выберите временной промежуток', reply_markup=markup)
 
+while True:
+    time.sleep(1)
+    z = time.localtime()
+    bot.infinity_polling()
+    if z.tm_hour == 13 and z.tm_min == 6 and z.tm_sec == 0:
+        search_info()
 
-bot.infinity_polling()
 
-now = datetime.now()
-run_at = now + timedelta(minutes=2)
-delay = (run_at - now).total_seconds()
 
-threading.Timer(delay, search_info).start()
+
+
+
+
